@@ -541,7 +541,7 @@
 
   </Style>
 
-  <Style x:Key="MaterialDesignNavigationSecondaryListBoxItem"
+  <Style x:Key="MaterialDesignNavigationAccentListBoxItem"
          TargetType="{x:Type ListBoxItem}"
          BasedOn="{StaticResource MaterialDesignNavigationListBoxItem}">
     <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
@@ -562,11 +562,6 @@
 
   </Style>
 
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignNavigationAccentListBoxItem"
-         TargetType="{x:Type ListBoxItem}"
-         BasedOn="{StaticResource MaterialDesignNavigationSecondaryListBoxItem}" />
-
   <Style x:Key="MaterialDesignNavigationListBox"
          TargetType="{x:Type ListBox}"
          BasedOn="{StaticResource MaterialDesignListBox}">
@@ -579,16 +574,11 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignNavigationPrimaryListBoxItem}" />
   </Style>
 
-  <Style x:Key="MaterialDesignNavigationSecondaryListBox"
-         TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignListBox}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignNavigationSecondaryListBoxItem}" />
-  </Style>
-
-  <!-- Obsolete -->
   <Style x:Key="MaterialDesignNavigationAccentListBox"
          TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignNavigationSecondaryListBox}" />
+         BasedOn="{StaticResource MaterialDesignListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignNavigationAccentListBoxItem}" />
+  </Style>
 
   <!--#endregion-->
 
@@ -692,7 +682,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipPrimaryListBoxItem}" />
   </Style>
 
-  <Style x:Key="MaterialDesignFilterChipSecondaryListBoxItem" TargetType="{x:Type ListBoxItem}">
+  <Style x:Key="MaterialDesignFilterChipAccentListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -706,27 +696,17 @@
                     FontStyle="{TemplateBinding FontStyle}"
                     FontWeight="{TemplateBinding FontWeight}"
                     IsChecked="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                    Style="{StaticResource MaterialDesignFilterChipSecondaryCheckBox}" />
+                    Style="{StaticResource MaterialDesignFilterChipAccentCheckBox}" />
         </ControlTemplate>
       </Setter.Value>
     </Setter>
   </Style>
 
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignFilterChipAccentListBoxItem"
-         TargetType="{x:Type ListBoxItem}"
-         BasedOn="{StaticResource MaterialDesignFilterChipSecondaryListBoxItem}" />
-
-  <Style x:Key="MaterialDesignFilterChipSecondaryListBox"
-         TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignFilterChipListBox}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipSecondaryListBoxItem}" />
-  </Style>
-
-  <!-- Obsolete -->
   <Style x:Key="MaterialDesignFilterChipAccentListBox"
          TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignFilterChipSecondaryListBox}" />
+         BasedOn="{StaticResource MaterialDesignFilterChipListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipAccentListBoxItem}" />
+  </Style>
 
   <Style x:Key="MaterialDesignFilterChipOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
@@ -780,7 +760,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBoxItem}" />
   </Style>
 
-  <Style x:Key="MaterialDesignFilterChipSecondaryOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
+  <Style x:Key="MaterialDesignFilterChipAccentOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -794,26 +774,17 @@
                     FontStyle="{TemplateBinding FontStyle}"
                     FontWeight="{TemplateBinding FontWeight}"
                     IsChecked="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                    Style="{StaticResource MaterialDesignFilterChipSecondaryOutlineCheckBox}" />
+                    Style="{StaticResource MaterialDesignFilterChipAccentOutlineCheckBox}" />
         </ControlTemplate>
       </Setter.Value>
     </Setter>
   </Style>
 
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignFilterChipAccentOutlineListBoxItem"
-         TargetType="{x:Type ListBoxItem}"
-         BasedOn="{StaticResource MaterialDesignFilterChipSecondaryOutlineListBoxItem}" />
-
-  <Style x:Key="MaterialDesignFilterChipSecondaryOutlineListBox"
-         TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignFilterChipListBox}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipSecondaryOutlineListBoxItem}" />
-  </Style>
-
   <Style x:Key="MaterialDesignFilterChipAccentOutlineListBox"
          TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignFilterChipSecondaryOutlineListBox}"/>
+         BasedOn="{StaticResource MaterialDesignFilterChipListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignFilterChipAccentOutlineListBoxItem}" />
+  </Style>
 
   <!--#endregion-->
 
@@ -873,7 +844,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipPrimaryListBoxItem}" />
   </Style>
 
-  <Style x:Key="MaterialDesignChoiceChipSecondaryListBoxItem" TargetType="{x:Type ListBoxItem}">
+  <Style x:Key="MaterialDesignChoiceChipAccentListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -888,27 +859,17 @@
                        FontWeight="{TemplateBinding FontWeight}"
                        GroupName="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
                        IsChecked="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                       Style="{StaticResource MaterialDesignChoiceChipSecondaryRadioButton}" />
+                       Style="{StaticResource MaterialDesignChoiceChipAccentRadioButton}" />
         </ControlTemplate>
       </Setter.Value>
     </Setter>
   </Style>
 
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignChoiceChipAccentListBoxItem"
-         TargetType="{x:Type ListBoxItem}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipSecondaryListBoxItem}"/>
-
-  <Style x:Key="MaterialDesignChoiceChipSecondaryListBox"
-         TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipListBox}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipSecondaryListBoxItem}" />
-  </Style>
-
-  <!-- Obsolete -->
   <Style x:Key="MaterialDesignChoiceChipAccentListBox"
          TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipSecondaryListBox}"/>
+         BasedOn="{StaticResource MaterialDesignChoiceChipListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipAccentListBoxItem}" />
+  </Style>
 
   <Style x:Key="MaterialDesignChoiceChipOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
@@ -964,7 +925,7 @@
     <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipPrimaryOutlineListBoxItem}" />
   </Style>
 
-  <Style x:Key="MaterialDesignChoiceChipSecondaryOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
+  <Style x:Key="MaterialDesignChoiceChipAccentOutlineListBoxItem" TargetType="{x:Type ListBoxItem}">
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ListBoxItem}">
@@ -979,27 +940,17 @@
                        FontWeight="{TemplateBinding FontWeight}"
                        GroupName="{Binding Name, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
                        IsChecked="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"
-                       Style="{StaticResource MaterialDesignChoiceChipSecondaryOutlineRadioButton}" />
+                       Style="{StaticResource MaterialDesignChoiceChipAccentOutlineRadioButton}" />
         </ControlTemplate>
       </Setter.Value>
     </Setter>
   </Style>
 
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignChoiceChipAccentOutlineListBoxItem"
-         TargetType="{x:Type ListBoxItem}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipSecondaryOutlineListBoxItem}"/>
-
-  <Style x:Key="MaterialDesignChoiceChipSecondaryOutlineListBox"
-         TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipListBox}">
-    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipSecondaryOutlineListBoxItem}" />
-  </Style>
-
-  <!-- Obsolete -->
   <Style x:Key="MaterialDesignChoiceChipAccentOutlineListBox"
          TargetType="{x:Type ListBox}"
-         BasedOn="{StaticResource MaterialDesignChoiceChipSecondaryOutlineListBox}" />
+         BasedOn="{StaticResource MaterialDesignChoiceChipListBox}">
+    <Setter Property="ItemContainerStyle" Value="{StaticResource MaterialDesignChoiceChipAccentOutlineListBoxItem}" />
+  </Style>
 
   <!--#endregion-->
 </ResourceDictionary>

@@ -36,7 +36,7 @@
             <materialDesign:NavigationRailAssist.FloatingContent>
               <Button Margin="8"
                       Content="{materialDesign:PackIcon Kind=Plus}"
-                      Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}" />
+                      Style="{StaticResource MaterialDesignFloatingActionAccentButton}" />
             </materialDesign:NavigationRailAssist.FloatingContent>
             <TabItem>
               <TabItem.Header>
@@ -399,7 +399,7 @@
                     Style="{StaticResource MaterialDesignNavigationRailTabControl}"
                     TabStripPlacement="Top">
           <materialDesign:NavigationRailAssist.FloatingContent>
-            <Button Margin="8" Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}">
+            <Button Margin="8" Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
               <materialDesign:PackIcon Width="24"
                                        Height="24"
                                        Kind="Plus" />

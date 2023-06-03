@@ -212,18 +212,13 @@
     <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}" />
   </Style>
 
-  <Style x:Key="MaterialDesignActionSecondaryToggleButton"
+  <Style x:Key="MaterialDesignActionAccentToggleButton"
          TargetType="{x:Type ToggleButton}"
          BasedOn="{StaticResource MaterialDesignActionToggleButton}">
     <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource SecondaryHueMidBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource SecondaryHueMidForegroundBrush}" />
   </Style>
-
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignActionAccentToggleButton"
-         TargetType="{x:Type ToggleButton}"
-         BasedOn="{StaticResource MaterialDesignActionSecondaryToggleButton}" />
 
   <Style x:Key="MaterialDesignFlatToggleButton" TargetType="{x:Type ToggleButton}">
     <Setter Property="Background" Value="{DynamicResource MaterialDesignToolBackground}" />
@@ -549,16 +544,11 @@
     <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
   </Style>
 
-  <Style x:Key="MaterialDesignSwitchSecondaryToggleButton"
+  <Style x:Key="MaterialDesignSwitchAccentToggleButton"
          TargetType="{x:Type ToggleButton}"
          BasedOn="{StaticResource MaterialDesignSwitchToggleButton}">
     <Setter Property="Background" Value="{DynamicResource SecondaryHueMidBrush}" />
   </Style>
-
-  <!-- Obsolete -->
-  <Style x:Key="MaterialDesignSwitchAccentToggleButton"
-         TargetType="{x:Type ToggleButton}"
-         BasedOn="{StaticResource MaterialDesignSwitchSecondaryToggleButton}" />
 
   <Style x:Key="MaterialDesignHamburgerToggleButton" TargetType="{x:Type ToggleButton}">
     <Setter Property="Background" Value="Transparent" />

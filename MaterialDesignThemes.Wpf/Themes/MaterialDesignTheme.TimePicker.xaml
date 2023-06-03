@@ -1,8 +1,8 @@
-<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters"
-                    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf"
-                    xmlns:internal="clr-namespace:MaterialDesignThemes.Wpf.Internal">
+                    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf">
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ValidationErrorTemplate.xaml" />
     <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Menu.xaml" />
@@ -14,13 +14,8 @@
   <converters:NotConverter x:Key="NotConverter" />
   <converters:MathConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
   <converters:FloatingHintOffsetCalculationConverter x:Key="FloatingHintOffsetCalculationConverter" />
+  <converters:PickerInnerPaddingConverter x:Key="PickerInnerPaddingConverter" />
   <converters:OutlinedDateTimePickerActiveBorderThicknessConverter x:Key="OutlinedDateTimePickerActiveBorderThicknessConverter" />
-  <converters:ThicknessCloneConverter x:Key="HelperTextMarginConverter" CloneEdges="Left" />
-  <converters:ThicknessCloneConverter x:Key="TimePickerTextBoxPaddingConverter" CloneEdges="All" AdditionalOffsetRight="18" />
-  <converters:ThicknessCloneConverter x:Key="PartButtonMarginConverter" CloneEdges="Top,Right,Bottom" FixedLeft="0" />
-  <converters:ThicknessCloneConverter x:Key="PartButtonMarginConverterTop" CloneEdges="Top,Right,Bottom" FixedLeft="0" AdditionalOffsetTop="12" />
-  <wpf:VerticalAlignmentConverter x:Key="VerticalAlignmentConverter" />
-  <converters:NullableToVisibilityConverter x:Key="NullableToVisibilityConverter" />
 
   <Style x:Key="MaterialDesignTimePickerTextBox" TargetType="{x:Type wpf:TimePickerTextBox}">
     <Setter Property="AllowDrop" Value="true" />
@@ -125,15 +120,14 @@
                       BorderThickness="{TemplateBinding BorderThickness}"
                       CornerRadius="{TemplateBinding wpf:TextFieldAssist.TextFieldCornerRadius}"
                       SnapsToDevicePixels="True">
-                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                   </Grid.ColumnDefinitions>
                   <Grid x:Name="grid"
                         MinWidth="1"
-                        VerticalAlignment="Stretch"
-                        HorizontalAlignment="Stretch">
+                        VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="Auto" />
                       <ColumnDefinition Width="*" />
@@ -141,12 +135,9 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock x:Name="PrefixTextBlock"
                                Grid.Column="0"
-                               Margin="0,0,2,0"
-                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                FontSize="{TemplateBinding FontSize}"
                                Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                               Text="{TemplateBinding wpf:TextFieldAssist.PrefixText}"
-                               Visibility="{TemplateBinding wpf:TextFieldAssist.PrefixText, Converter={StaticResource NullableToVisibilityConverter}}" />
+                               Text="{TemplateBinding wpf:TextFieldAssist.PrefixText}" />
                     <ContentControl x:Name="PART_Watermark"
                                     Grid.Column="1"
                                     Focusable="False"
@@ -156,10 +147,6 @@
                     <ScrollViewer x:Name="PART_ContentHost"
                                   Grid.Column="1"
                                   Panel.ZIndex="1"
-                                  VerticalAlignment="Stretch"
-                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                  HorizontalAlignment="Stretch"
-                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   wpf:ScrollViewerAssist.IgnorePadding="True"
                                   Focusable="false"
                                   HorizontalScrollBarVisibility="Hidden"
@@ -168,16 +155,14 @@
                                   VerticalScrollBarVisibility="Hidden" />
                     <wpf:SmartHint x:Name="Hint"
                                    Grid.Column="1"
+                                   Margin="{TemplateBinding wpf:TextFieldAssist.TextBoxViewMargin}"
                                    FloatingOffset="{TemplateBinding wpf:HintAssist.FloatingOffset}"
                                    FloatingScale="{TemplateBinding wpf:HintAssist.FloatingScale}"
                                    FontFamily="{TemplateBinding wpf:HintAssist.FontFamily}"
                                    FontSize="{TemplateBinding FontSize}"
                                    HintOpacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
                                    HintProxy="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HintProxyFabricConverter.Instance}}"
-                                   UseFloating="{TemplateBinding wpf:HintAssist.IsFloating}"
-                                   VerticalAlignment="Stretch"
-                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}">
+                                   UseFloating="{TemplateBinding wpf:HintAssist.IsFloating}">
                       <wpf:SmartHint.Hint>
                         <Border x:Name="HintBackgroundBorder"
                                 Background="{TemplateBinding wpf:HintAssist.Background}"
@@ -188,19 +173,14 @@
                     </wpf:SmartHint>
                     <TextBlock x:Name="SuffixTextBlock"
                                Grid.Column="2"
-                               Margin="0,0,2,0"
-                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                FontSize="{TemplateBinding FontSize}"
                                Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                               Text="{TemplateBinding wpf:TextFieldAssist.SuffixText}"
-                               Visibility="{TemplateBinding wpf:TextFieldAssist.SuffixText, Converter={StaticResource NullableToVisibilityConverter}}" />
+                               Text="{TemplateBinding wpf:TextFieldAssist.SuffixText}" />
                   </Grid>
                   <Button x:Name="PART_ClearButton"
                           Grid.Column="1"
                           Height="Auto"
                           Padding="2,0,0,0"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                          Command="{x:Static internal:ClearText.ClearCommand}"
                           Focusable="False"
                           Style="{DynamicResource MaterialDesignToolButton}">
                     <Button.Visibility>
@@ -226,13 +206,12 @@
                            Background="{TemplateBinding wpf:TextFieldAssist.UnderlineBrush}"
                            CornerRadius="{TemplateBinding wpf:TextFieldAssist.UnderlineCornerRadius}"
                            Visibility="{TemplateBinding wpf:TextFieldAssist.DecorationVisibility}" />
-            <Canvas x:Name="HelperTextWrapper" VerticalAlignment="Bottom" Margin="{TemplateBinding Padding, Converter={StaticResource HelperTextMarginConverter}}">
-              <TextBlock x:Name="HelperTextTextBlock" Canvas.Top="2"
+            <Canvas x:Name="HelperTextWrapper" VerticalAlignment="Bottom">
+              <TextBlock Canvas.Top="2"
                          MaxWidth="{Binding ActualWidth, ElementName=border}"
                          FontSize="{TemplateBinding wpf:HintAssist.HelperTextFontSize}"
                          Opacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
-                         Text="{TemplateBinding wpf:HintAssist.HelperText}"
-                         Style="{Binding Path=(wpf:HintAssist.HelperTextStyle), RelativeSource={RelativeSource TemplatedParent}}"/>
+                         Text="{TemplateBinding wpf:HintAssist.HelperText}" />
             </Canvas>
           </Grid>
           <ControlTemplate.Triggers>
@@ -252,7 +231,7 @@
               <Setter TargetName="Hint" Property="FloatingOffset">
                 <Setter.Value>
                   <MultiBinding Converter="{StaticResource FloatingHintOffsetCalculationConverter}">
-                    <Binding Path="FontFamily" ElementName="Hint" />
+                    <Binding Path="FontFamily" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="FontSize" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingScale)" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingOffset)" RelativeSource="{RelativeSource TemplatedParent}" />
@@ -262,7 +241,7 @@
               <Setter TargetName="grid" Property="Margin">
                 <Setter.Value>
                   <MultiBinding Converter="{StaticResource FloatingHintOffsetCalculationConverter}">
-                    <Binding Path="FontFamily" ElementName="Hint" />
+                    <Binding Path="FontFamily" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="FontSize" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingScale)" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingOffset)" RelativeSource="{RelativeSource TemplatedParent}" />
@@ -270,33 +249,25 @@
                 </Setter.Value>
               </Setter>
             </MultiTrigger>
-
-            <MultiTrigger>
-              <MultiTrigger.Conditions>
-                <Condition Property="wpf:HintAssist.IsFloating" Value="True" />
-                <Condition Property="wpf:TextFieldAssist.HasOutlinedTextField" Value="False" />
-                <Condition Property="VerticalContentAlignment" Value="Center" />
-              </MultiTrigger.Conditions>
-              <Setter TargetName="Hint" Property="InitialVerticalOffset" Value="-6" />
-            </MultiTrigger>
-
             <Trigger Property="wpf:TextFieldAssist.HasFilledTextField" Value="True">
               <Setter Property="Background" Value="{DynamicResource MaterialDesignTextFieldBoxBackground}" />
+              <Setter Property="Padding" Value="16,8,12,8" />
+              <Setter TargetName="HelperTextWrapper" Property="Margin" Value="16,0,0,0" />
             </Trigger>
             <Trigger Property="wpf:TextFieldAssist.HasOutlinedTextField" Value="True">
               <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextAreaBorder}" />
               <Setter Property="BorderThickness" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:TimePickerAssist.OutlinedBorderInactiveThickness)}" />
+              <Setter Property="Padding" Value="16,16,12,16" />
               <Setter Property="VerticalContentAlignment" Value="Top" />
+              <Setter TargetName="HelperTextWrapper" Property="Margin" Value="16,0,0,0" />
               <Setter TargetName="Hint" Property="FloatingOffset">
                 <Setter.Value>
                   <MultiBinding Converter="{StaticResource FloatingHintOffsetCalculationConverter}">
-                    <Binding Path="FontFamily" ElementName="Hint" />
+                    <Binding Path="FontFamily" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="FontSize" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingScale)" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="(wpf:HintAssist.FloatingOffset)" RelativeSource="{RelativeSource TemplatedParent}" />
                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}" />
-                    <Binding Path="Padding" RelativeSource="{RelativeSource TemplatedParent}" />
-                    <Binding Path="VerticalContentAlignment" RelativeSource="{RelativeSource TemplatedParent}" />
                   </MultiBinding>
                 </Setter.Value>
               </Setter>
@@ -497,7 +468,6 @@
     <Setter Property="ClockStyle" Value="{DynamicResource MaterialDesignClock}" />
     <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-    <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="IsHeaderVisible" Value="True" />
     <Setter Property="Padding" Value="{x:Static wpf:Constants.TextBoxDefaultPadding}" />
     <Setter Property="Template">
@@ -513,21 +483,19 @@
           </ControlTemplate.Resources>
           <Grid x:Name="PART_Root">
             <wpf:TimePickerTextBox x:Name="PART_TextBox"
-                                   Padding="{TemplateBinding Padding, Converter={StaticResource TimePickerTextBoxPaddingConverter}}"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
                                    HorizontalAlignment="Stretch"
-                                   VerticalAlignment="Stretch"
                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                   VerticalContentAlignment="Center"
                                    wpf:HintAssist.FloatingOffset="{TemplateBinding wpf:HintAssist.FloatingOffset}"
                                    wpf:HintAssist.FloatingScale="{TemplateBinding wpf:HintAssist.FloatingScale}"
                                    wpf:HintAssist.Foreground="{TemplateBinding wpf:HintAssist.Foreground}"
                                    wpf:HintAssist.HelperText="{TemplateBinding wpf:HintAssist.HelperText}"
                                    wpf:HintAssist.HelperTextFontSize="{TemplateBinding wpf:HintAssist.HelperTextFontSize}"
-                                   wpf:HintAssist.HelperTextStyle="{TemplateBinding wpf:HintAssist.HelperTextStyle}"
                                    wpf:HintAssist.Hint="{TemplateBinding wpf:HintAssist.Hint}"
                                    wpf:HintAssist.HintOpacity="{TemplateBinding wpf:HintAssist.HintOpacity}"
                                    wpf:HintAssist.IsFloating="{TemplateBinding wpf:HintAssist.IsFloating}"
-                                   wpf:HintAssist.FontFamily="{TemplateBinding wpf:HintAssist.FontFamily}"
                                    wpf:TextFieldAssist.DecorationVisibility="{TemplateBinding wpf:TextFieldAssist.DecorationVisibility}"
                                    wpf:TextFieldAssist.HasClearButton="{TemplateBinding wpf:TextFieldAssist.HasClearButton}"
                                    wpf:TextFieldAssist.HasFilledTextField="{TemplateBinding wpf:TextFieldAssist.HasFilledTextField}"
@@ -542,12 +510,21 @@
                                    wpf:TextFieldAssist.UnderlineCornerRadius="{TemplateBinding wpf:TextFieldAssist.UnderlineCornerRadius}"
                                    BorderBrush="{TemplateBinding BorderBrush}"
                                    Focusable="{TemplateBinding Focusable}"
-                                   Style="{DynamicResource MaterialDesignTimePickerTextBox}" />
+                                   Style="{DynamicResource MaterialDesignTimePickerTextBox}">
+              <wpf:TimePickerTextBox.Padding>
+                <MultiBinding Converter="{StaticResource PickerInnerPaddingConverter}">
+                  <Binding Path="Padding" RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding ElementName="PART_Button"
+                           Mode="OneWay"
+                           Path="ActualWidth" />
+                </MultiBinding>
+              </wpf:TimePickerTextBox.Padding>
+            </wpf:TimePickerTextBox>
             <Button x:Name="PART_Button"
                     Height="16"
-                    Margin="{TemplateBinding Padding, Converter={StaticResource PartButtonMarginConverter}}"
+                    Margin="{TemplateBinding Padding, Converter={StaticResource PickerInnerPaddingConverter}}"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="{TemplateBinding VerticalContentAlignment, Converter={StaticResource VerticalAlignmentConverter}}"
+                    VerticalAlignment="Center"
                     Focusable="False"
                     Foreground="{TemplateBinding BorderBrush}"
                     Template="{StaticResource ClockButtonTemplate}" />
@@ -560,21 +537,15 @@
                    StaysOpen="False" />
           </Grid>
           <ControlTemplate.Triggers>
-
-            <!-- PART_Button margins adhering to VerticalContentAlignment for default/filled style when VerticalContentAlignment=Top (other cases handled by default value) -->
-            <MultiTrigger>
-              <MultiTrigger.Conditions>
-                <Condition SourceName="PART_Button" Property="VerticalAlignment" Value="Top" />
-                <Condition Property="wpf:TextFieldAssist.HasOutlinedTextField" Value="False" />
-              </MultiTrigger.Conditions>
-              <Setter TargetName="PART_Button" Property="Margin" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Padding, Converter={StaticResource PartButtonMarginConverterTop}}" />
-            </MultiTrigger>
-
             <Trigger Property="wpf:TextFieldAssist.HasFilledTextField" Value="True">
               <Setter Property="Background" Value="{DynamicResource MaterialDesignTextFieldBoxBackground}" />
+              <Setter Property="Padding" Value="16,8" />
+              <Setter Property="wpf:TextFieldAssist.TextBoxViewMargin" Value="{x:Static wpf:Constants.DefaultTextBoxViewMarginEmbedded}" />
             </Trigger>
             <Trigger Property="wpf:TextFieldAssist.HasOutlinedTextField" Value="True">
               <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesignTextAreaBorder}" />
+              <Setter Property="Padding" Value="16" />
+              <Setter Property="wpf:TextFieldAssist.TextBoxViewMargin" Value="{x:Static wpf:Constants.DefaultTextBoxViewMarginEmbedded}" />
             </Trigger>
             <MultiTrigger>
               <MultiTrigger.Conditions>
@@ -630,7 +601,6 @@
     <Setter Property="wpf:HintAssist.Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
     <Setter Property="wpf:TextFieldAssist.TextBoxViewMargin" Value="{x:Static wpf:Constants.DefaultTextBoxViewMargin}" />
     <Setter Property="wpf:TextFieldAssist.UnderlineBrush" Value="{DynamicResource PrimaryHueMidBrush}" />
-    <Setter Property="internal:ClearText.HandlesClearCommand" Value="True" />
   </Style>
 
   <Style x:Key="MaterialDesignFloatingHintTimePicker"
@@ -645,7 +615,6 @@
     <Setter Property="wpf:TextFieldAssist.HasFilledTextField" Value="True" />
     <Setter Property="wpf:TextFieldAssist.TextFieldCornerRadius" Value="4,4,0,0" />
     <Setter Property="wpf:TextFieldAssist.UnderlineCornerRadius" Value="0" />
-    <Setter Property="Padding" Value="16,8" />
   </Style>
 
   <Style x:Key="MaterialDesignOutlinedTimePicker"
@@ -653,7 +622,6 @@
          BasedOn="{StaticResource MaterialDesignFloatingHintTimePicker}">
     <Setter Property="wpf:TextFieldAssist.HasOutlinedTextField" Value="True" />
     <Setter Property="wpf:TextFieldAssist.TextFieldCornerRadius" Value="4" />
-    <Setter Property="Padding" Value="16" />
   </Style>
 
 </ResourceDictionary>

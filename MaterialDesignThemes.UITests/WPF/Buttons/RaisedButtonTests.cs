@@ -1,28 +1,29 @@
 ﻿using System.Windows.Media;
 
-namespace MaterialDesignThemes.UITests.WPF.Buttons;
-
-public class RaisedButtonTests : TestBase
+namespace MaterialDesignThemes.UITests.WPF.Buttons
 {
-    public RaisedButtonTests(ITestOutputHelper output)
-        : base(output)
-    { }
-
-    [Fact]
-    public async Task OnLoad_ThemeBrushesSet()
+    public class RaisedButtonTests : TestBase
     {
-        await using var recorder = new TestRecorder(App);
+        public RaisedButtonTests(ITestOutputHelper output)
+            : base(output)
+        { }
 
-        //Arrange
-        IVisualElement<Button> button = await LoadXaml<Button>(@"<Button Content=""Button"" />");
-        Color midColor = await GetThemeColor("PrimaryHueMidBrush");
+        [Fact]
+        public async Task OnLoad_ThemeBrushesSet()
+        {
+            await using var recorder = new TestRecorder(App);
 
-        //Act
-        Color? color = await button.GetBackgroundColor();
+            //Arrange
+            IVisualElement<Button> button = await LoadXaml<Button>(@"<Button Content=""Button"" />");
+            Color midColor = await GetThemeColor("PrimaryHueMidBrush");
 
-        //Assert
-        Assert.Equal(midColor, color);
+            //Act
+            Color? color = await button.GetBackgroundColor();
 
-        recorder.Success();
+            //Assert
+            Assert.Equal(midColor, color);
+
+            recorder.Success();
+        }
     }
 }

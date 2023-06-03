@@ -28,7 +28,7 @@
         </Button>
         <Button Margin="16"
                 Command="{x:Static materialDesign:Transitioner.MoveNextCommand}"
-                Style="{StaticResource MaterialDesignFloatingActionSecondaryButton}">
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
           <materialDesign:PackIcon Kind="StepForward" />
         </Button>
       </StackPanel>

@@ -11,13 +11,12 @@ internal class FloatingHintTransformConverter : IMultiValueConverter
 
     public object? Convert(object?[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
-        if (values?.Length != 5
+        if (values?.Length != 4
             || values.Any(v => v == null)
             || !double.TryParse(values[0]!.ToString(), out double scale)
             || !double.TryParse(values[1]!.ToString(), out double lower)
             || !double.TryParse(values[2]!.ToString(), out double upper)
-            || values[3] is not Point floatingOffset
-            || !double.TryParse(values[4]!.ToString(), out double initialVerticalOffset))
+            || values[3] is not Point floatingOffset)
         {
             return Transform.Identity;
         }
@@ -35,13 +34,10 @@ internal class FloatingHintTransformConverter : IMultiValueConverter
         }
         if (ApplyTranslateTransform)
         {
-            /* As a consequence of Math.Min() which is used below to ensure the initial offset is respected (in filled style)
-               the SmartHint will not be able to "float downwards". I believe this is acceptable though.
-             */
             transformGroup.Children.Add(new TranslateTransform
             {
                 X = scale * floatingOffset.X,
-                Y = Math.Min(initialVerticalOffset, scale * floatingOffset.Y)
+                Y = scale * floatingOffset.Y
             });
         }
         return transformGroup;

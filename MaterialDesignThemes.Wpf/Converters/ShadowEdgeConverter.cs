@@ -5,7 +5,7 @@ using System.Windows.Media.Effects;
 
 namespace MaterialDesignThemes.Wpf.Converters;
 
-public class ShadowOpacityMaskConverter : IMultiValueConverter
+public class ShadowEdgeConverter : IMultiValueConverter
 {
     public object? Convert(object[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -29,11 +29,40 @@ public class ShadowOpacityMaskConverter : IMultiValueConverter
 
         double blurRadius = dropShadow.BlurRadius;
 
-        Rect rect = new Rect(
+        Rect rect;
+
+        if (values.Length > 3 && values[3] is ShadowEdges edges and not ShadowEdges.All)
+        {
+            rect = new Rect(0, 0, width, height);
+
+            if (edges.HasFlag(ShadowEdges.Left))
+            {
+                rect = rect with { X = -blurRadius, Width = width + blurRadius };
+            }
+
+            if (edges.HasFlag(ShadowEdges.Top))
+            {
+                rect = rect with { Y = -blurRadius, Height = height + blurRadius };
+            }
+
+            if (edges.HasFlag(ShadowEdges.Right))
+            {
+                rect = rect with { Width = rect.Width + blurRadius };
+            }
+
+            if (edges.HasFlag(ShadowEdges.Bottom))
+            {
+                rect = rect with { Height = rect.Height + blurRadius };
+            }
+        }
+        else
+        {
+            rect = new Rect(
                 -blurRadius,
                 -blurRadius,
                 width + blurRadius + blurRadius,
                 height + blurRadius + blurRadius);
+        }
 
         var drawing = new GeometryDrawing(Brushes.White, null, new RectangleGeometry(rect));
         DrawingBrush rv = new(drawing)

@@ -62,8 +62,7 @@
                         UniqueKey="dialogs_sample1">
         <materialDesign:DialogHost DialogClosed="Sample1_DialogHost_OnDialogClosed"
                                    DialogClosing="Sample1_DialogHost_OnDialogClosing"
-                                   DialogTheme="Inherit"
-                                   DialogContentUniformCornerRadius="20">
+                                   DialogTheme="Inherit">
           <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="16">
               <TextBlock Text="Add a new fruit." />
@@ -125,7 +124,7 @@
                       Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                       Content="{materialDesign:PackIcon Kind=Plus,
                                                         Size=22}"
-                      Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}" />
+                      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" />
             </Grid>
           </Border>
         </materialDesign:DialogHost>
@@ -325,7 +324,7 @@
                       Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                       Content="{materialDesign:PackIcon Kind=Plus,
                                                         Size=22}"
-                      Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryButton}" />
+                      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" />
             </Grid>
           </Border>
         </materialDesign:DialogHost>

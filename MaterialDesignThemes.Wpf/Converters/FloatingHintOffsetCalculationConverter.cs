@@ -22,28 +22,13 @@ namespace MaterialDesignThemes.Wpf.Converters
 
             double hintHeight = fontFamily.LineSpacing * fontSize;
             double floatingHintHeight = hintHeight * floatingScale;
-            double offset = floatingHintHeight;
 
-            // For the "outlined" styles, the hint should (by default) float to the outline; this needs a bit of calculation using additional input.
-            if (values.Length == 7
-                && values[4] is double parentActualHeight
-                && values[5] is Thickness padding
-                && values[6] is VerticalAlignment verticalContentAlignment)
+            double offset = (values.Length > 4 ? values[4] : null) switch
             {
-                switch (verticalContentAlignment)
-                {
-                    case VerticalAlignment.Top:
-                    case VerticalAlignment.Stretch:
-                        offset = (floatingHintHeight / 2) + padding.Top;
-                        break;
-                    case VerticalAlignment.Center:
-                        offset = (floatingHintHeight / 2) + (parentActualHeight - padding.Top) / 2;
-                        break;
-                    case VerticalAlignment.Bottom:
-                        offset = (floatingHintHeight / 2) + parentActualHeight - padding.Top - padding.Bottom;
-                        break;
-                }
-            }
+                Thickness padding => (floatingHintHeight / 2) + padding.Top,
+                double parentHeight => (parentHeight - hintHeight + floatingHintHeight) / 2,
+                _ => floatingHintHeight
+            };
 
             if (IsType<Point>(targetType))
             {

@@ -16,20 +16,20 @@ public static class TabAssist
 
     public static bool GetHasUniformTabWidth(DependencyObject element) => (bool)element.GetValue(HasUniformTabWidthProperty);
 
-    internal static Visibility GetBindableIsItemsHost(DependencyObject obj)
-        => (Visibility)obj.GetValue(BindableIsItemsHostProperty);
+    internal static bool GetBindableIsItemsHost(DependencyObject obj)
+        => (bool)obj.GetValue(BindableIsItemsHostProperty);
 
-    internal static void SetBindableIsItemsHost(DependencyObject obj, Visibility value)
+    internal static void SetBindableIsItemsHost(DependencyObject obj, bool value)
         => obj.SetValue(BindableIsItemsHostProperty, value);
 
     internal static readonly DependencyProperty BindableIsItemsHostProperty =
-        DependencyProperty.RegisterAttached("BindableIsItemsHost", typeof(Visibility), typeof(TabAssist), new PropertyMetadata(Visibility.Collapsed, OnBindableIsItemsHostChanged));
+        DependencyProperty.RegisterAttached("BindableIsItemsHost", typeof(bool), typeof(TabAssist), new PropertyMetadata(false, OnBindableIsItemsHostChanged));
 
     private static void OnBindableIsItemsHostChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         if (d is Panel panel)
         {
-            panel.IsItemsHost = (Visibility)e.NewValue == Visibility.Visible;
+            panel.IsItemsHost = (bool)e.NewValue;
         }
     }
 }

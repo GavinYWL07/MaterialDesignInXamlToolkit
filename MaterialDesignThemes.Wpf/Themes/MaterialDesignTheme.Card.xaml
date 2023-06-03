@@ -15,7 +15,7 @@
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type wpf:Card}">
           <ControlTemplate.Resources>
-            <converters:ShadowOpacityMaskConverter x:Key="ShadowEdgeConverter" />
+            <converters:ShadowEdgeConverter x:Key="ShadowEdgeConverter" />
           </ControlTemplate.Resources>
           <Grid Background="Transparent">
             <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(wpf:ShadowAssist.CacheMode)}">
@@ -24,14 +24,17 @@
                   <Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}" />
                   <Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}" />
                   <Binding Path="(wpf:ElevationAssist.Elevation)" RelativeSource="{RelativeSource TemplatedParent}" />
+                  <Binding Path="(wpf:ShadowAssist.ShadowEdges)" RelativeSource="{RelativeSource TemplatedParent}" />
                 </MultiBinding>
               </AdornerDecorator.OpacityMask>
               <Border CornerRadius="{TemplateBinding UniformCornerRadius, Converter={x:Static converters:DoubleToCornerRadiusConverter.Instance}}" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:ElevationAssist.Elevation), Converter={x:Static converters:ShadowConverter.Instance}}">
                 <Border x:Name="PART_ClipBorder"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
-                        Clip="{TemplateBinding ContentClip}">
-                  <ContentPresenter x:Name="ContentPresenter"
+                        Clip="{TemplateBinding ContentClip}" />
+              </Border>
+            </AdornerDecorator>
+            <ContentPresenter x:Name="ContentPresenter"
                               Margin="{TemplateBinding Padding}"
                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -39,9 +42,6 @@
                               ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
                               ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                               ContentTemplateSelector="{TemplateBinding ContentControl.ContentTemplateSelector}" />
-                </Border>
-              </Border>
-            </AdornerDecorator>
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger Property="ClipContent" Value="True">

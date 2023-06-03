@@ -428,15 +428,6 @@ public class MainWindowViewModel : ViewModelBase
                 DocumentationLink.DemoPageLink<SmartHint>(),
                 DocumentationLink.StyleLink("SmartHint"),
             });
-
-        yield return new DemoItem(
-            "PopupBox",
-            typeof(PopupBox),
-            new[]
-            {
-                DocumentationLink.DemoPageLink<PopupBox>(),
-                DocumentationLink.StyleLink("PopupBox"), 
-            });
     }
 
     private bool DemoItemsFilter(object obj)

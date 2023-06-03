@@ -687,9 +687,6 @@
         <Setter TargetName="activeTrack" Property="CornerRadius" Value="0,3,3,0" />
         <Setter TargetName="activeTrack" Property="HorizontalAlignment" Value="Right" />
       </Trigger>
-      <Trigger Property="wpf:SliderAssist.HideActiveTrack" Value="True">
-        <Setter TargetName="activeTrack" Property="Visibility" Value="Hidden" />
-      </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
 
@@ -780,9 +777,6 @@
       <Trigger Property="IsDirectionReversed" Value="True">
         <Setter TargetName="activeTrack" Property="CornerRadius" Value="3,3,0,0" />
         <Setter TargetName="activeTrack" Property="VerticalAlignment" Value="Top" />
-      </Trigger>
-      <Trigger Property="wpf:SliderAssist.HideActiveTrack" Value="True">
-        <Setter TargetName="activeTrack" Property="Visibility" Value="Hidden" />
       </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
@@ -875,9 +869,6 @@
         <Setter TargetName="activeTrack" Property="CornerRadius" Value="0,3,3,0" />
         <Setter TargetName="activeTrack" Property="HorizontalAlignment" Value="Right" />
       </Trigger>
-      <Trigger Property="wpf:SliderAssist.HideActiveTrack" Value="True">
-        <Setter TargetName="activeTrack" Property="Visibility" Value="Hidden" />
-      </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>
 
@@ -968,9 +959,6 @@
       <Trigger Property="IsDirectionReversed" Value="True">
         <Setter TargetName="activeTrack" Property="CornerRadius" Value="3,3,0,0" />
         <Setter TargetName="activeTrack" Property="VerticalAlignment" Value="Top" />
-      </Trigger>
-      <Trigger Property="wpf:SliderAssist.HideActiveTrack" Value="True">
-        <Setter TargetName="activeTrack" Property="Visibility" Value="Hidden" />
       </Trigger>
     </ControlTemplate.Triggers>
   </ControlTemplate>

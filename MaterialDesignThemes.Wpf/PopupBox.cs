@@ -353,21 +353,6 @@ namespace MaterialDesignThemes.Wpf
         }
 
         /// <summary>
-        /// Gets or sets the elevation of the popup card.
-        /// </summary>
-        public static readonly DependencyProperty PopupElevationProperty = DependencyProperty.Register(
-            nameof(PopupElevation), typeof(Elevation), typeof(PopupBox), new PropertyMetadata(Elevation.Dp0));
-
-        /// <summary>
-        /// Gets or sets the elevation of the popup card.
-        /// </summary>
-        public Elevation PopupElevation
-        {
-            get { return (Elevation) GetValue(PopupElevationProperty); }
-            set { SetValue(PopupElevationProperty, value); }
-        }
-
-        /// <summary>
         /// Framework use. Provides the method used to position the popup.
         /// </summary>
         public CustomPopupPlacementCallback PopupPlacementMethod => GetPopupPlacement;
@@ -396,7 +381,7 @@ namespace MaterialDesignThemes.Wpf
             EventManager.RegisterRoutedEvent(
                 "Opened",
                 RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler),
+                typeof(EventHandler),
                 typeof(PopupBox));
 
         /// <summary>
@@ -421,7 +406,7 @@ namespace MaterialDesignThemes.Wpf
             EventManager.RegisterRoutedEvent(
                 "Closed",
                 RoutingStrategy.Bubble,
-                typeof(RoutedEventHandler),
+                typeof(EventHandler),
                 typeof(PopupBox));
 
         /// <summary>
@@ -533,79 +518,69 @@ namespace MaterialDesignThemes.Wpf
                 SetCurrentValue(IsPopupOpenProperty, false);
         }
 
-        private CustomPopupPlacement[] GetPopupPlacement(Size popupSize, Size targetSize, Point _)
+        private CustomPopupPlacement[] GetPopupPlacement(Size popupSize, Size targetSize, Point offset)
         {
             double x, y;
-            double offsetX = PopupHorizontalOffset;
-            double offsetY = PopupVerticalOffset;
 
-            Size popupSizeTransformed = new Size(DpiHelper.TransformFromDeviceX(this, popupSize.Width), DpiHelper.TransformFromDeviceY(this, popupSize.Height));
-            Size targetSizeTransformed = new Size(DpiHelper.TransformFromDeviceX(this, targetSize.Width), DpiHelper.TransformFromDeviceY(this, targetSize.Height));
+            if (FlowDirection == FlowDirection.RightToLeft)
+                offset.X += targetSize.Width / 2;
 
             switch (PlacementMode)
             {
                 case PopupBoxPlacementMode.BottomAndAlignLeftEdges:
-                    x = 0 + offsetX - UseOffsetIfRtl(popupSizeTransformed.Width);
-                    y = targetSizeTransformed.Height + offsetY;
+                    x = 0 - Math.Abs(offset.X * 3);
+                    y = targetSize.Height - Math.Abs(offset.Y);
                     break;
                 case PopupBoxPlacementMode.BottomAndAlignRightEdges:
-                    x = 0 - popupSizeTransformed.Width + targetSizeTransformed.Width + offsetX + UseOffsetIfRtl(popupSizeTransformed.Width - targetSizeTransformed.Width * 2);
-                    y = targetSizeTransformed.Height + offsetY;
+                    x = 0 - popupSize.Width + targetSize.Width - offset.X;
+                    y = targetSize.Height - Math.Abs(offset.Y);
                     break;
                 case PopupBoxPlacementMode.BottomAndAlignCentres:
-                    x = (targetSizeTransformed.Width - popupSizeTransformed.Width) / 2 + offsetX - UseOffsetIfRtl(targetSizeTransformed.Width);
-                    y = targetSizeTransformed.Height + offsetY;
+                    x = targetSize.Width / 2 - popupSize.Width / 2 - Math.Abs(offset.X * 2);
+                    y = targetSize.Height - Math.Abs(offset.Y);
                     break;
                 case PopupBoxPlacementMode.TopAndAlignLeftEdges:
-                    x = 0 + offsetX - UseOffsetIfRtl(popupSizeTransformed.Width);
-                    y = 0 - popupSizeTransformed.Height + offsetY;
+                    x = 0 - Math.Abs(offset.X * 3);
+                    y = 0 - popupSize.Height - Math.Abs(offset.Y * 2);
                     break;
                 case PopupBoxPlacementMode.TopAndAlignRightEdges:
-                    x = 0 - popupSizeTransformed.Width + targetSizeTransformed.Width + offsetX + UseOffsetIfRtl(popupSizeTransformed.Width - targetSizeTransformed.Width * 2);
-                    y = 0 - popupSizeTransformed.Height + offsetY;
+                    x = 0 - popupSize.Width + targetSize.Width - offset.X;
+                    y = 0 - popupSize.Height - Math.Abs(offset.Y * 2);
                     break;
                 case PopupBoxPlacementMode.TopAndAlignCentres:
-                    x = (targetSizeTransformed.Width - popupSizeTransformed.Width) / 2 + offsetX - UseOffsetIfRtl(targetSizeTransformed.Width);
-                    y = 0 - popupSizeTransformed.Height + offsetY;
+                    x = targetSize.Width / 2 - popupSize.Width / 2 - Math.Abs(offset.X * 2);
+                    y = 0 - popupSize.Height - Math.Abs(offset.Y * 2);
                     break;
                 case PopupBoxPlacementMode.LeftAndAlignTopEdges:
-                    x = 0 - popupSizeTransformed.Width + offsetX + UseOffsetIfRtl(popupSizeTransformed.Width);
-                    y = 0 + offsetY;
+                    x = 0 - popupSize.Width - Math.Abs(offset.X * 2);
+                    y = 0 - Math.Abs(offset.Y * 3);
                     break;
                 case PopupBoxPlacementMode.LeftAndAlignBottomEdges:
-                    x = 0 - popupSizeTransformed.Width + offsetX + UseOffsetIfRtl(popupSizeTransformed.Width);
-                    y = 0 - (popupSizeTransformed.Height - targetSizeTransformed.Height) + offsetY;
+                    x = 0 - popupSize.Width - Math.Abs(offset.X * 2);
+                    y = 0 - (popupSize.Height - targetSize.Height);
                     break;
                 case PopupBoxPlacementMode.LeftAndAlignMiddles:
-                    x = 0 - popupSizeTransformed.Width + offsetX + UseOffsetIfRtl(popupSizeTransformed.Width);
-                    y = 0 - (popupSizeTransformed.Height - targetSizeTransformed.Height) / 2 + offsetY;
+                    x = 0 - popupSize.Width - Math.Abs(offset.X * 2);
+                    y = targetSize.Height / 2 - popupSize.Height / 2 - Math.Abs(offset.Y * 2);
                     break;
                 case PopupBoxPlacementMode.RightAndAlignTopEdges:
-                    x = targetSizeTransformed.Width + offsetX - UseOffsetIfRtl(popupSizeTransformed.Width + targetSizeTransformed.Width * 2);
-                    y = 0 + offsetY;
+                    x = targetSize.Width;
+                    y = 0 - Math.Abs(offset.X * 3);
                     break;
                 case PopupBoxPlacementMode.RightAndAlignBottomEdges:
-                    x = targetSizeTransformed.Width + offsetX - UseOffsetIfRtl(popupSizeTransformed.Width + targetSizeTransformed.Width * 2);
-                    y = 0 - (popupSizeTransformed.Height - targetSizeTransformed.Height) + offsetY;
+                    x = targetSize.Width;
+                    y = 0 - (popupSize.Height - targetSize.Height);
                     break;
                 case PopupBoxPlacementMode.RightAndAlignMiddles:
-                    x = targetSizeTransformed.Width + offsetX - UseOffsetIfRtl(popupSizeTransformed.Width + targetSizeTransformed.Width * 2);
-                    y = 0 - (popupSizeTransformed.Height - targetSizeTransformed.Height) / 2 + offsetY;
+                    x = targetSize.Width;
+                    y = targetSize.Height / 2 - popupSize.Height / 2 - Math.Abs(offset.Y * 2);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
 
-            double xTransformed = DpiHelper.TransformToDeviceX(x);
-            double yTransformed = DpiHelper.TransformToDeviceY(y);
-
-            _popupPointFromLastRequest = new Point(xTransformed, yTransformed);
+            _popupPointFromLastRequest = new Point(x, y);
             return new[] { new CustomPopupPlacement(_popupPointFromLastRequest, PopupPrimaryAxis.Horizontal) };
-
-            double UseOffsetIfRtl(double rtlOffset)
-            {
-                return FlowDirection == FlowDirection.LeftToRight ? 0 : rtlOffset;
-            }
         }
 
         private void AnimateChildrenIn(bool reverse)
