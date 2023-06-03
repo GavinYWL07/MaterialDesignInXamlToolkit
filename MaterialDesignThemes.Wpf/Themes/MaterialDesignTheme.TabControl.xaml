@@ -37,7 +37,6 @@
                            VerticalAlignment="Stretch"
                            Panel.ZIndex="1"
                            wpf:ElevationAssist.Elevation="{TemplateBinding wpf:ElevationAssist.Elevation}"
-                           wpf:ShadowAssist.ShadowEdges="{TemplateBinding wpf:ShadowAssist.ShadowEdges}"
                            Background="{TemplateBinding wpf:ColorZoneAssist.Background}"
                            DockPanel.Dock="Top"
                            Focusable="False">
@@ -50,14 +49,14 @@
                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                Focusable="False"
-                               wpf:TabAssist.BindableIsItemsHost="{Binding IsVisible, RelativeSource={RelativeSource Self}}"
+                               wpf:TabAssist.BindableIsItemsHost="{Binding Visibility, RelativeSource={RelativeSource Self}}"
                                KeyboardNavigation.TabIndex="1"
                                Rows="1" />
                   <VirtualizingStackPanel x:Name="HeaderPanel"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Focusable="False"
-                                          wpf:TabAssist.BindableIsItemsHost="{Binding IsVisible, RelativeSource={RelativeSource Self}}"
+                                          wpf:TabAssist.BindableIsItemsHost="{Binding Visibility, RelativeSource={RelativeSource Self}}"
                                           KeyboardNavigation.TabIndex="1"
                                           Orientation="Horizontal" />
                 </StackPanel>
@@ -151,17 +150,14 @@
             </MultiTrigger>
             
             <Trigger Property="TabStripPlacement" Value="Bottom">
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Top" />
               <Setter TargetName="PART_HeaderZone" Property="DockPanel.Dock" Value="Bottom" />
             </Trigger>
             <Trigger Property="TabStripPlacement" Value="Left">
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Right" />
               <Setter TargetName="CenteredHeaderPanel" Property="Columns" Value="1" />
               <Setter TargetName="CenteredHeaderPanel" Property="Rows" Value="0" />
               <Setter TargetName="PART_HeaderZone" Property="DockPanel.Dock" Value="Left" />
             </Trigger>
             <Trigger Property="TabStripPlacement" Value="Right">
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Left" />
               <Setter TargetName="CenteredHeaderPanel" Property="Columns" Value="1" />
               <Setter TargetName="CenteredHeaderPanel" Property="Rows" Value="0" />
               <Setter TargetName="PART_HeaderZone" Property="DockPanel.Dock" Value="Right" />
@@ -174,7 +170,6 @@
     <Setter Property="wpf:ColorZoneAssist.Mode" Value="PrimaryMid" />
     <Setter Property="wpf:ElevationAssist.Elevation" Value="Dp4" />
     <Setter Property="wpf:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-    <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Bottom" />
     <Setter Property="wpf:TabAssist.HasUniformTabWidth" Value="False" />
   </Style>
 
@@ -184,7 +179,6 @@
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="wpf:ColorZoneAssist.Background" Value="Transparent" />
     <Setter Property="wpf:ElevationAssist.Elevation" Value="Dp0" />
-    <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="None" />
     <Setter Property="wpf:TabAssist.HasFilledTab" Value="False" />
   </Style>
 
@@ -249,6 +243,7 @@
     <Setter Property="Height" Value="48" />
     <Setter Property="MinWidth" Value="90" />
     <Setter Property="Padding" Value="16,12" />
+    <Setter Property="wpf:DialogHost.RestoreFocusElement" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TabItem}">
@@ -483,6 +478,7 @@
     <Setter Property="Foreground" Value="{DynamicResource MaterialDesignBody}" />
     <Setter Property="Height" Value="72" />
     <Setter Property="Padding" Value="0" />
+    <Setter Property="wpf:DialogHost.RestoreFocusElement" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=TabControl}}" />
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type TabItem}">
@@ -625,7 +621,6 @@
                   SnapsToDevicePixels="True">
               <wpf:Card x:Name="shadowCard"
                         wpf:ElevationAssist.Elevation="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:ElevationAssist.Elevation)}"
-                        wpf:ShadowAssist.ShadowEdges="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(wpf:ShadowAssist.ShadowEdges)}"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{DynamicResource MaterialDesignDivider}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -704,7 +699,6 @@
             </Trigger>
             <Trigger Property="TabStripPlacement" Value="Top">
               <Setter Property="BorderThickness" Value="0,0,0,1" />
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Bottom" />
               <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
               <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
               <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -719,7 +713,6 @@
             </Trigger>
             <Trigger Property="TabStripPlacement" Value="Bottom">
               <Setter Property="BorderThickness" Value="0,1,0,0" />
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Top" />
               <Setter TargetName="DividerRect" Property="Grid.ColumnSpan" Value="2" />
               <Setter TargetName="DividerRect" Property="Grid.RowSpan" Value="1" />
               <Setter TargetName="DividerRect" Property="Height" Value="1" />
@@ -734,7 +727,6 @@
             </Trigger>
             <Trigger Property="TabStripPlacement" Value="Right">
               <Setter Property="BorderThickness" Value="1,0,0,0" />
-              <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Left" />
               <Setter TargetName="DividerRect" Property="HorizontalAlignment" Value="Left" />
               <Setter TargetName="TabGrid" Property="DockPanel.Dock" Value="Right" />
             </Trigger>
@@ -745,6 +737,5 @@
     <Setter Property="VerticalContentAlignment" Value="Top" />
     <Setter Property="wpf:ElevationAssist.Elevation" Value="Dp0" />
     <Setter Property="wpf:RippleAssist.Feedback" Value="{DynamicResource MaterialDesignFlatButtonRipple}" />
-    <Setter Property="wpf:ShadowAssist.ShadowEdges" Value="Right" />
   </Style>
 </ResourceDictionary>
